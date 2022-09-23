@@ -28,9 +28,23 @@ Opening issues that suggest new material is fine too, but relying on others to w
 
 ## Popular PQC Algorithms
 
-(Describe the NIST algorithms as they stand today)
+### Current NIST algorithms
 
-(Describe non-NIST algorithms that have some support)
+#### KEMs
+
+- [CRYSTALS-Kyber](https://pq-crystals.org/kyber/)
+
+#### Signatures
+
+- [CRYSTALS-Dilithium](https://pq-crystals.org/dilithium/)
+- [Falcon](https://falcon-sign.info/)
+- [SPHINCS+](https://sphincs.org/)
+
+### Non-NIST algorithms that have some support
+
+#### KEMs
+ - [NTRU-HRSS](https://ntru-hrss.org/)
+ - [Classic McEliece](https://classic.mceliece.org/)
 
 ## KEMs in PQC
 
@@ -58,8 +72,13 @@ Opening issues that suggest new material is fine too, but relying on others to w
 
 (...and the security weaknesses of each)
 
-## Further Reading
+## Further Reading & Resources
 
+### Reading List
 (A reading list. [Serious Cryptography](https://nostarch.com/seriouscrypto). Pointers to PQC sites with good explanations. List of reasonable Wikipedia pages.)
+
+### Developer Resources
+
+- [Open Quantum Safe](https://openquantumsafe.org/) and corresponding [github](https://github.com/open-quantum-safe)
 
 

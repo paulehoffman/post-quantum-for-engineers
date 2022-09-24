@@ -1,6 +1,7 @@
 # Post-Quantum Cryptography for Engineers
 
-(Some editorship info goes here)
+This work in the public domain.
+[See this page for more information.](https://creativecommons.org/publicdomain/zero/1.0/)
 
 ## Introduction
 

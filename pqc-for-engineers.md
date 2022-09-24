@@ -1,6 +1,6 @@
 # Post-Quantum Cryptography for Engineers
 
-This work in the public domain.
+This work is part of public domain.
 [See this page for more information.](https://creativecommons.org/publicdomain/zero/1.0/)
 
 ## Introduction
@@ -9,7 +9,7 @@ This document is meant to give general guidance on the structure and use of post
 Topics include which PQC algorithms to use, how PQC key exchange mechanisms (KEMs) differ from classical KEMs, expected size and processing time differences between PQC algorithms and classical algorithms, and so on.
 
 The reader of this document is expected to understand coding and data structures using established cryptographic libraries. They are also expected to understand classical cryptographic basics.
-It does not cover such topics as when classical algorithms might become vulnerable (for that, see documents such as [Quantum Computing and the DNS](https://www.icann.org/octo-031-en.pdf) and others.) 
+It does not cover such topics as when classical algorithms might become vulnerable (for that, see documents such as [Quantum Computing and the DNS](https://www.icann.org/octo-031-en.pdf) and others.)
 
 ### Contributing to This Document
 
@@ -29,33 +29,67 @@ Opening issues that suggest new material is fine too, but relying on others to w
 
 ## Popular PQC Algorithms
 
-### Current NIST algorithms
+The National Institute of Standards and Technology (NIST) started a process to solicit, evaluate, and standardize one or more quantum-resistant public-key cryptographic algorithms, as seen [here](https://csrc.nist.gov/projects/post-quantum-cryptography).
+Said process has reached its [first announcement](https://csrc.nist.gov/publications/detail/nistir/8413/final) in July 5, 2022, which stated which candidates to be standardized for two types of algorithms:
+
+* Key Encapsulation Mechanisms (KEMs)
+* Digital Signatures
+
+NIST announced as well that they will be [opening a fourth round](https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/round-4/guidelines-for-submitting-tweaks-fourth-round.pdf) to standardize an alternative KEM, and a [call](https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/call-for-proposals-dig-sig-sept-2022.pdf) for new candidates for a post-quantum signature algorithm.
+
+### Announced to be standardized NIST algorithms
+
+#### PQC KEMs
+
+* [CRYSTALS-Kyber](https://pq-crystals.org/kyber/): Kyber is a module learning with errors (MLWE)-based key encapsulation mechanism.
+
+#### PQC Signatures
+
+* [CRYSTALS-Dilithium](https://pq-crystals.org/dilithium/)
+* [Falcon](https://falcon-sign.info/)
+* [SPHINCS+](https://sphincs.org/)
+
+### Candidates advancing to the fourth-round for standardization at NIST
+
+The fourth-round of the NIST process only concerns with KEMs.
+The candidates still advancing for standardization are:
+
+* [Classic McEliece](https://classic.mceliece.org/)
+* [BIKE](https://bikesuite.org/)
+* [HQC](http://pqc-hqc.org/)
+* [SIKE](https://sike.org/): Supersingular Isogeny Key Encapsulation (SIKE) is a specific realization of the SIDH (Supersingular Isogeny Diffie-Hellman) protocol. Recently, a [mathematical attack](https://eprint.iacr.org/2022/975.pdf) based on the "glue-and-split" theorem from 1997 from Ernst Kani was found against the underlying chosen starting curve and torsion information. In practical terms, this attack allows for the efficient recovery of the private key. NIST has to yet comment if the scheme will be still considered and there is still debate around if the scheme can be changed so that the attack can be prevented.
+
+### Algorithms not-to-be standardized by NIST that have some support
 
 #### KEMs
 
-- [CRYSTALS-Kyber](https://pq-crystals.org/kyber/)
+* [NTRU](https://ntru.org/)
+* [NTRU-Prime](https://ntruprime.cr.yp.to/)
 
-#### Signatures
+## KEMs
 
-- [CRYSTALS-Dilithium](https://pq-crystals.org/dilithium/)
-- [Falcon](https://falcon-sign.info/)
-- [SPHINCS+](https://sphincs.org/)
+### What is a KEM
 
-### Non-NIST algorithms that have some support
+### What security properties do they provide
 
-#### KEMs
- - [NTRU-HRSS](https://ntru-hrss.org/)
- - [Classic McEliece](https://classic.mceliece.org/)
+* IND-CPA
+* IND-CCA
 
-## KEMs in PQC
+### Where can a KEM be used
 
-(Which are used where)
-
-(Replacing DH algorithms with PQ KEMs)
-
-(“Key Transport API (aka RSA)”, the “Key Agreement API (aka (EC)DH)”, and how the “KEM API” is neither of those.)
+To note:
+* KEMs vs Diffie-Hellman (DH): they can be a replacement but they are not a one-to-one replacement. KEMs do not provide non-interactivity, for example, that DH does provide.
+* Replacing DH algorithms with PQ KEMs.
+* Which are used where.
+* “Key Transport API (aka RSA)”, the “Key Agreement API (aka (EC)DH)”, and how the “KEM API” is neither of those.
 
 ## POC Signatures
+
+### What is a Post-quantum Signature
+
+### What security properties do they provide
+
+### Where can different types of PQC signatures be used
 
 (HBS vs Lattice signatures: when each is appropriate.)
 
@@ -81,5 +115,4 @@ Opening issues that suggest new material is fine too, but relying on others to w
 ### Developer Resources
 
 - [Open Quantum Safe](https://openquantumsafe.org/) and corresponding [github](https://github.com/open-quantum-safe)
-
 

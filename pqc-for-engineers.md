@@ -83,7 +83,7 @@ To note:
 * Which are used where.
 * “Key Transport API (aka RSA)”, the “Key Agreement API (aka (EC)DH)”, and how the “KEM API” is neither of those.
 
-## POC Signatures
+## PQC Signatures
 
 ### What is a Post-quantum Signature
 

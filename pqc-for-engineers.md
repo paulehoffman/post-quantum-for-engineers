@@ -37,6 +37,40 @@ Said process has reached its [first announcement](https://csrc.nist.gov/publicat
 
 NIST announced as well that they will be [opening a fourth round](https://csrc.nist.gov/csrc/media/Projects/post-quantum-cryptography/documents/round-4/guidelines-for-submitting-tweaks-fourth-round.pdf) to standardize an alternative KEM, and a [call](https://csrc.nist.gov/csrc/media/Projects/pqc-dig-sig/documents/call-for-proposals-dig-sig-sept-2022.pdf) for new candidates for a post-quantum signature algorithm.
 
+## Classic vs. Post-Quantum
+
+Post-quantum cryptography or quantum-safe cryptography refers to cryptographic algorithms that are secure against cryptographic attacks from both a quantum and a classic computers.
+
+When considering the security risks associated with the ability of a quantum computer to attack classic cryptography it is important to distinguish between the impact on symmetric algorithms and public-key ones. 
+
+For unstructured data such as symmetric encrypted data or cryptographic hashes, although quantum computers can search for specific solutions across all possible input combinations (e.g., Grover's Algorithm), no quantum algorithm is known to completely break the security properties of these classes of algorithms: doubling the size of symmetric secrets and hash outputs provide an easy solution against such attacks.
+
+For structured data such as public-key and signatures, instead, quantum computers can fully solve the underlying hard problems used in classic cryptography (see Shor's Algorithm). Because an increase of the size of the keypair would not provide a secure solution in this case, a complete replacement of the algorithm is needed. Therefore, post-quantum public-key cryptography must rely on problems that are different from the ones used in classic public-key cryptography (i.e., the integer factorization problem, the discrete logarithm problem, and the elliptic-curve discrete logarithm problem). The current set of problems used in post-quantum cryptography can be currently grouped into five different categories: multivariate, lattice-based, code-based, hash-based, and the isogeny-based.
+
+### Lattice-Based Public-Key Cryptography
+
+Lattice-based public-key cryptography leverages the simple construction of lattices (i.e., a regular collection of points in an Euclidean space that are regularly spaced) to build problems that are hard to solve such as the Shortest Vector or Closes Vector Problem, Learning with Errors, and Learning with Rounding. All these problems have good proof for worst-to-average case reduction, thus equating the hardness of the average case to the worst-case.
+
+The possibility to implement public-key schemes on lattices is tied to the characteristics of the basis used for the lattice. In particular, solving any of the mentioned problems can be easy when using reduced or "good" basis (i.e., as short as possible and as orthogonal as possible), while it becomes computationally infeasible when using "bad" basis (i.e., long vectors not orthogonal). Although the problem might seem trivial, it is computationally hard when considering many dimensions. Therefore a typical approach is to use use "bad" basis for public keys and "good" basis for private keys. The public keys ("bad" basis) let you easily verify signatures by checking, for example, that a vector is the closest or smallest, but do not let you solve the problem (i.e., finding the vector). Conversely, private keys ( i.e., the "good" basis) can be used for generating the signatures (e.g., finding the specific vector). Signing is equivalent of solving the lattice problem.
+
+Lattice-based schemes usually have good performances and average size public keys and signatures making them good candidates for general-purpose use such as replacing the use of RSA in PKIX certificates.
+
+Examples of such class of algorithms are Falcon and Dilithium.
+
+### Multivariate-Based Public-Key Cryptography
+
+The Multivariate Quadratic problem is an NP-hard problem that can be expressed as finding the common "zero" vector that solves a set of polynomials in finite fields. In other words, the underlying problem can be expressed as finding the vector (z1, ..., zn) in Fn2 that solves a set of given equations:
+
+    f1(x1, ..., xn) = 0, ...., fm(x1, ..., xn) = 0
+
+Signatures use easily invertible non-linear polynomials (P) that need to be masked by using a combination of affine linear transformations (S and T). Indeed, given P:Fn -> Fm, S: Fn -> Fn, T: Fm -> Fm, the affine transformations are build in such a way to make the public key G = S * P * T hard to invert. Knowing its individual components (i.e., the private key) allows to easily compute the inverse G^(-1) which is used to produce signatures, i.e. G^(-1) = T^(-1) * P^(-1) * S^(-1). To verify signatures, use the public key over the signature vector, i.e. G(s) = m.
+
+### Code-Based Public-Key Cryptography
+
+### Hash-Based Public-Key Cryptography
+
+### Isogeny-Based Public-Key Cryptography
+
 ### Announced to be standardized NIST algorithms
 
 #### PQC KEMs
@@ -83,7 +117,7 @@ To note:
 * Which are used where.
 * “Key Transport API (aka RSA)”, the “Key Agreement API (aka (EC)DH)”, and how the “KEM API” is neither of those.
 
-## POC Signatures
+## PQC Signatures
 
 ### What is a Post-quantum Signature
 
